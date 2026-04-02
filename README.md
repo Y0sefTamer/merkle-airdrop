@@ -1,66 +1,65 @@
-## Foundry
+# 🌳 Merkle Airdrop & Signatures
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+This repository contains an advanced smart contract implementation of a gas-efficient token airdrop system using **Merkle Trees** and **Cryptographic Signatures**. 
 
-Foundry consists of:
+It was built as part of the **Cyfrin Updraft Advanced Foundry Course**, focusing on secure, scalable, and cost-effective methods for distributing tokens to users.
 
-- **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
-- **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
-- **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
-- **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+## 📖 Overview
 
-## Documentation
+In traditional airdrops, storing a massive list of eligible addresses and their corresponding amounts directly on-chain is incredibly gas-expensive. This project solves that problem by:
 
-https://book.getfoundry.sh/
+1. **Merkle Trees:** Computing a Merkle Root off-chain from a list of eligible users. Only the Merkle Root is stored on-chain. Users provide a Merkle Proof to verify their eligibility, drastically reducing storage costs.
+2. **Cryptographic Signatures (EIP-712):** Adding an extra layer of security. Users can securely sign a message off-chain, and a relayer can submit the transaction on their behalf to claim the airdrop (gasless claims) or to verify authorization before minting/transferring tokens.
 
-## Usage
+## ✨ Features
 
-### Build
+- **Gas-Optimized Claims:** O(log N) verification complexity using Merkle Proofs.
+- **EIP-712 Integration:** Typed structured data hashing and signing for secure authorization.
+- **Robust Testing:** Comprehensive test suite written in Solidity using the Foundry framework.
 
-```shell
-$ forge build
-```
+## 🛠️ Tech Stack
 
-### Test
+- **Solidity:** Smart contract development.
+- **Foundry:** Compilation, testing, and deployment framework.
 
-```shell
-$ forge test
-```
+## 🚀 Getting Started
 
-### Format
+### Prerequisites
 
-```shell
-$ forge fmt
-```
+You need to have [Foundry](https://getfoundry.sh/) installed on your machine.
 
-### Gas Snapshots
+### Installation
 
-```shell
-$ forge snapshot
-```
+1. Clone the repository:
+   ```bash
+   git clone [https://github.com/Y0sefTamer/merkle-airdrop.git](https://github.com/Y0sefTamer/merkle-airdrop.git)
+   cd merkle-airdrop
+   ```
+2. Install dependencies:
+   ```bash
+   forge install
+   ```
+2. Build the contracts:
+   ```bash
+   forge build
+   ```
+### Running Tests
 
-### Anvil
+#### To execute the test suite and verify the Merkle Proof and Signature logic:
 
-```shell
-$ anvil
-```
+   ```bash
+   forge test
+   ```
 
-### Deploy
+## 🧠 What I Learned
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
+Throughout this project, I deepened my understanding of:
 
-### Cast
+Building and verifying Merkle Trees off-chain and on-chain.
 
-```shell
-$ cast <subcommand>
-```
+Understanding how ecrecover works and the intricacies of Ethereum signatures.
 
-### Help
+Implementing EIP-712 standard for structured data hashing and signing.
 
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+Advanced testing methodologies using Foundry.
+
